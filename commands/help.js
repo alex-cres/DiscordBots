@@ -5,36 +5,37 @@ module.exports = {
     argsDescription: {
         'commandName': 'name of the command to view arguments'
     },
-    execute(message, args, client) {
+    execute(message, args, client,result) {
         comhelp = args.shift();
         if (comhelp == undefined) {
             const commandshelp = "";
             let iter = client.commands.size;
             for (const [name, command] of client.commands) {
-                message.channel.send(((!--iter) ? "└► " : "├► ") + commandshelp + command.name + " " + command.args + " : " + command.description);
+                result += (((!--iter) ? "└► " : "├► ") + commandshelp + command.name + " " + command.args + " : " + command.description) + "\n";
             }
         } else {
             comhelp = comhelp.toLowerCase();
             if (client.commands.get(comhelp) != undefined) {
                 const commandi = client.commands.get(comhelp);
-                message.channel.send("├► Command " + commandi.name);
-                message.channel.send("├► " + commandi.description);
+                result += ("├► Command " + commandi.name) + "\n";
+                result += ("├► " + commandi.description) + "\n";
                 const arguments = commandi.args.split(/ +/);
                 let iter = arguments.length;
                 if (commandi.args === '') {
-                    message.channel.send("└► No Args");
+                    result += ("└► No Args") + "\n";
                 } else {
                     for (const arg of arguments) {
                         if (iter == arguments.length) {
-                            message.channel.send("├► Args(" + iter + "):");
+                            result += ("├► Args(" + iter + "):") + "\n";
                         }
                         const argDesc = commandi.argsDescription[arg];
-                        message.channel.send(((!--iter) ? "└───► " : "├───► ") + arg + " : " + argDesc);
+                        result += (((!--iter) ? "└───► " : "├───► ") + arg + " : " + argDesc) + "\n";
                     }
                 }
             } else {
-                message.channel.send("└ Command not recognized : " + args);
+                result += ("└ Command not recognized : " + args) + "\n";
             }
         }
+        return result;
     }
 }

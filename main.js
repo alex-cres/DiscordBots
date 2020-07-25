@@ -21,18 +21,19 @@ client.once('ready', ()=>{
 });
 
 client.on('message', message =>{
-
+    let result ="";
     if(!message.content.startsWith(preffix) || message.author.bot) return;
-    message.channel.send("├► analysing command");
+    result+=("├► analysing command") + "\n";
     const args = message.content.slice(preffix.length).split(/ +/);
     
     const command = args.shift().toLowerCase();
 
     if(client.commands.get(command) != undefined){
-        client.commands.get(command).execute(message,args,client);
+        result =client.commands.get(command).execute(message,args,client,result);
     }else{
-        message.channel.send("└► command not recognized");
-    }
+        result+=("└► command not recognized");
+    }  
+    message.channel.send('```'+result+'```');
 
 });
 

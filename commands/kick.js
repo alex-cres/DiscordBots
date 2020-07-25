@@ -5,7 +5,7 @@ module.exports = {
     argsDescription: {
         'personName':'name of the person to kick'
     },
-    execute(message,args){
-            message.channel.send( "└► WIP");
+    execute(message,args,client,result){
+            return  result+"└► WIP";
     }
 }

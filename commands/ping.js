@@ -3,7 +3,7 @@ module.exports = {
     args:'',
     description: 'responds with "pong"',
     argsDescription: {},
-    execute(message,args){
-        message.channel.send("└► pong").catch(console.error);
+    execute(message,args,client,result){
+        return result +"└► pong";
     }
 }
