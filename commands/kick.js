@@ -1,11 +1,19 @@
 module.exports = {
-    name:'kick',
-    args:'personName',
+    name: 'kick',
+    args: 'personName',
+    aliases: ['k','ki'],
     description: 'Kicks a person from the server',
     argsDescription: {
-        'personName':'name of the person to kick'
+        'personName': 'name of the person to kick'
     },
-    execute(message,args,client,result){
-            return  result+"└► WIP";
+    execute(message, args, client, result) {
+        const member = message.member;
+
+        if(member.permissions.has("KICK_MEMBERS")){
+            return result + "└► WIP";
+        }else {
+            return result + "└► WIP";
+        }
+        
     }
 }

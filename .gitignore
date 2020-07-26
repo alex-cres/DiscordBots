@@ -105,3 +105,6 @@ dist
 
 # Vault 
 vault/
+
+#eslint
+.eslintrc.json

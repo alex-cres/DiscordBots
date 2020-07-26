@@ -1,6 +1,7 @@
 module.exports = {
     name: 'quadsolver',
     args: 'a b c',
+    aliases: ['qs','quadraticsolver'],
     description: 'solves a quadratic equation',
     argsDescription: {
         "a": "the a component of the equation",

@@ -1,31 +1,32 @@
 module.exports = {
     name: 'help',
-    args: 'commandName',
+    args: '[commandName]',
+    aliases: ['h'],
     description: 'Shows the commands that the bot can execute, can also help with a specific command if the command name is put after it',
     argsDescription: {
-        'commandName': 'name of the command to view arguments'
+        '[commandName]': '(optional) name of the command to view arguments'
     },
-    execute(message, args, client,result) {
-        comhelp = args.shift();
-        if (comhelp == undefined) {
+    execute(message, args, client, result) {
+        let firstArgs = args.shift();
+        if (firstArgs == undefined) {
             const commandshelp = "";
             let iter = client.commands.size;
             for (const [name, command] of client.commands) {
-                result += (((!--iter) ? "└► " : "├► ") + commandshelp + command.name + " " + command.args + " : " + command.description) + "\n";
+                result += (((!--iter) ? "└► " : "├► ") + commandshelp + name + " " + command.args + " : " + command.description) + "\n";
             }
         } else {
-            comhelp = comhelp.toLowerCase();
-            if (client.commands.get(comhelp) != undefined) {
-                const commandi = client.commands.get(comhelp);
+            firstArgs = firstArgs.toLowerCase();
+            if (client.commands.get(firstArgs) != undefined) {
+                const commandi = client.commands.get(firstArgs);
                 result += ("├► Command " + commandi.name) + "\n";
                 result += ("├► " + commandi.description) + "\n";
-                const arguments = commandi.args.split(/ +/);
-                let iter = arguments.length;
+                const argsList = commandi.args.split(/ +/);
+                let iter = argsList.length;
                 if (commandi.args === '') {
                     result += ("└► No Args") + "\n";
                 } else {
-                    for (const arg of arguments) {
-                        if (iter == arguments.length) {
+                    for (const arg of argsList) {
+                        if (iter == argsList.length) {
                             result += ("├► Args(" + iter + "):") + "\n";
                         }
                         const argDesc = commandi.argsDescription[arg];
