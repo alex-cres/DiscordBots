@@ -10,9 +10,9 @@ module.exports = {
         const member = message.member;
 
         if(member.permissions.has("KICK_MEMBERS")){
-            return result + "└► WIP";
+            return result + "└► U HAZ PERMISSIONS BUT NO";
         }else {
-            return result + "└► WIP";
+            return result + "└► U HAZ NO PERMISSIONS";
         }
         
     }

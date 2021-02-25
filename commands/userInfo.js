@@ -13,7 +13,7 @@ module.exports = {
             return result + ("└► "+JSON.stringify(user));
 
         } else {
-            let user = client.users.cache.find(r => r.username == firstArgs);
+            let user = client.users.cache.find(r => r.username == firstArgs || r.tag == firstArgs );
             return result + ("└► "+JSON.stringify(user));
         }
 
