@@ -3,7 +3,9 @@ const { prefix, token } = require("./vault/discord-integration.json");
 
 const client = new Discord.Client();
 
-
+client.tictactoegameboard = [];
+client.tictactoegameboardturn = 'x';
+client.tictactoegameboardwins = {};
 const fs = require("fs");
 
 client.commands = new Discord.Collection();
@@ -38,7 +40,7 @@ client.on('message', message => {
     } else {
         result += ("└► command not recognized");
     }
-    message.channel.send('```' + result + '```');
+    message.channel.send(result);
 
 });
 
